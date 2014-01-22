@@ -217,4 +217,79 @@ class MailChimp {
 		return $this->sendRequest('campaigns/update', $params);
 	}
 
+	/******************* ECOMM METHODS *********************
+
+	/**
+	* Import Ecommerce Order Information to be used for Segmentation. 
+	* This will generally be used by ecommerce package 
+	* plugins provided by us or by 3rd part system developers.
+	*/
+	public function ecommOrderAdd($order = array()) {
+		$params = array('order' => $order);
+		return $this->sendRequest('ecomm/order-add', $params);
+	}
+
+	/**
+	* Delete Ecommerce Order Information used for segmentation. 
+	* This will generally be used by ecommerce package plugins 
+	* that we provide or by 3rd part system developers.
+	*/
+	public function ecommmOrderDel($store_id = null, $order_id = null) {
+		$params = array('store_id' => $store_id, 'order_id' => $order_id);
+		return $this->sendRequest('ecomm/order-del', $params);
+	}
+
+	/**
+	* Retrieve the Ecommerce Orders for an account
+	*/
+	public function ecommOrders($cid = null, $start = null, $limit = null, $since = null) {
+		$params = array('cid' => $cid, 'start' => $start, 'limit' => $limit, 'since' => $since);
+		return $this->sendRequest('ecomm/oreders', $params);
+	}
+
+	/****************** FOLDERS METHODS **************/
+
+	/**
+	* Add a new folder to file campaigns, autoresponders, or templates in
+	*/
+	public function foldersAdd($name = null, $type = null) {
+		$params = array('name' => $name, 'type' => $type);
+		return $this->sendRequest('folders/add', $params);
+	}
+
+	/**
+	* Delete a campaign, autoresponder, or template folder. 
+	* Note that this will simply make whatever was in the 
+	* folder appear unfiled, no other data is removed
+	*/
+	public function foldersDel($fid = null, $type = null) {
+		$params = array('fid' => $fid, 'type' => $type);
+		return $this->sendRequest('folders/del', $params);
+	}
+
+	/**
+	* List all the folders of a certain type
+	*/
+	public function foldersList($type = null) {
+		$params = array('type' => $type);
+		return $this->sendRequest('folders/list', $params);
+	}
+
+	/**
+	* Update the name of a folder for campaigns, autoresponders, or templates
+	*/
+	public function foldersUpdate($fid = null, $name = null, $type = null) {
+		$params = array('fid' => $fid, 'name' => $name, 'type' => $type);
+		return $this->sendRequest('folders/update', $params);
+	}
+
+	/***************** GALLERY METHODS **************/
+
+	/**
+	* Return a section of the image gallery
+	*/
+	public function galleryList($opts = array()) {
+		$params = array('opts' => $opts);
+		return $this->sendRequest('gallery/list', $params);
+	}
 }

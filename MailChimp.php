@@ -1,6 +1,6 @@
 <?php
 
-/**
+/***
 * MailChimp class
 * @author zhzhussupovkz@gmail.com
 */
@@ -53,11 +53,11 @@ class MailChimp {
 		return $final;
 	}
 
-	/********** CAMPAIGNS METHODS ************/
+	/*********** CAMPAIGNS METHODS ************/
 
-	/*
-	Get the content (both html and text) for a campaign either 
-	as it would appear in the campaign archive or as the raw, original content 
+	/**
+	* Get the content (both html and text) for a campaign either 
+	* as it would appear in the campaign archive or as the raw, original content 
 	*/
 	public function campaignsContent($cid = null, $optional = array()) {
 		$required = array('cid' => $cid);
@@ -65,9 +65,9 @@ class MailChimp {
 		return $this->sendRequest('campaigns/content', $params);
 	}
 
-	/*
-	Create a new draft campaign to send. 
-	You can not have more than 32,000 campaigns in your account.
+	/**
+	* Create a new draft campaign to send. 
+	* You can not have more than 32,000 campaigns in your account.
 	*/
 	public function campaignsCreate($type = null, $options = array(), $content = array(), 
 	$segment_opts = array(), $type_opts = array()) {
@@ -82,18 +82,18 @@ class MailChimp {
 		return $this->sendRequest('campaigns/create', $params);
 	}
 
-	/*
-	Delete a campaign. 
-	Seriously, "poof, gone!" - be careful! 
-	Seriously, no one can undelete these.
+	/**
+	* Delete a campaign. 
+	* Seriously, "poof, gone!" - be careful! 
+	* Seriously, no one can undelete these.
 	*/
 	public function campaignsDelete($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/delete', $params);
 	}
 
-	/*
-	Get the list of campaigns and their details matching the specified filters
+	/**
+	* Get the list of campaigns and their details matching the specified filters
 	*/
 	public function campaignsList($filters = array(), $start = null, $limit = null, $sort_field = null, $sort_dir = null) {
 		$params = array_merge($filters, array(
@@ -105,43 +105,43 @@ class MailChimp {
 		return $this->sendRequest('campaigns/list', $params);
 	}
 
-	/*
-	Pause an AutoResponder or RSS campaign from sending
+	/**
+	* Pause an AutoResponder or RSS campaign from sending
 	*/
 	public function campaignsPause($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/pause', $params);
 	}
 
-	/*
-	Returns information on whether a campaign is ready 
-	to send and possible issues we may have 
-	detected with it - very similar to the confirmation step in the app.
+	/**
+	* Returns information on whether a campaign is ready 
+	* to send and possible issues we may have 
+	* detected with it - very similar to the confirmation step in the app.
 	*/
 	public function campaignsReady($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/ready', $params);
 	}
 
-	/*
-	Replicate a campaign.
+	/**
+	* Replicate a campaign.
 	*/
 	public function campaignsReplicate($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/replicate', $params);
 	}
 
-	/*
-	Resume sending an AutoResponder or RSS campaign
+	/**
+	* Resume sending an AutoResponder or RSS campaign
 	*/
 	public function campaignsResume($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/resume', $params);
 	}
 
-	/*
-	Schedule a campaign to be sent in batches sometime in the future. 
-	Only valid for "regular" campaigns
+	/**
+	* Schedule a campaign to be sent in batches sometime in the future. 
+	* Only valid for "regular" campaigns
 	*/
 	public function campaignsScheduleBatch($cid = null, $schedule_time = null, $num_batches = null, $stagger_mins = null) {
 		$required = array('cid' => $cid, 'schedule_time' => $schedule_time);
@@ -150,8 +150,8 @@ class MailChimp {
 		return $this->sendRequest('campaigns/schedule-batch', $params);
 	}
 
-	/*
-	Schedule a campaign to be sent in the future
+	/**
+	* Schedule a campaign to be sent in the future
 	*/
 	public function campaignsSchedule($cid = null, $schedule_time = null, $schedule_time_b = null) {
 		$required = array('cid' => $cid, 'schedule_time' => $schedule_time);
@@ -160,9 +160,9 @@ class MailChimp {
 		return $this->sendRequest('campaigns/schedule', $params);
 	}
 
-	/*
-	Allows one to test their segmentation 
-	rules before creating a campaign using them
+	/**
+	* Allows one to test their segmentation 
+	* rules before creating a campaign using them
 	*/
 	public function campaignsSegmentTest($list_id = null, $options = array()) {
 		$required = array('list_id' => $list_id);
@@ -170,17 +170,17 @@ class MailChimp {
 		return $this->sendRequest('campaigns/segment-test', $params);
 	}
 
-	/*
-	Send a given campaign immediately.
-	For RSS campaigns, this will "start" them.
+	/**
+	* Send a given campaign immediately.
+	* For RSS campaigns, this will "start" them.
 	*/
 	public function campaignsSend($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/send', $params);
 	}
 
-	/*
-	Send a test of this campaign to the provided email addresses
+	/**
+	* Send a test of this campaign to the provided email addresses
 	*/
 	public function campaignsSendTest($cid = null, $test_emails = array(), $send_type = null) {
 		$required = array('cid' => $cid);
@@ -189,28 +189,28 @@ class MailChimp {
 		return $this->sendRequest('campaigns/send-test', $params);
 	}
 
-	/*
-	Get the HTML template content sections for a campaign. 
-	Note that this will return very jagged, 
-	non-standard results based on the template a 
-	campaign is using. You only want to use this 
-	if you want to allow editing template sections in your application.
+	/**
+	* Get the HTML template content sections for a campaign. 
+	* Note that this will return very jagged, 
+	* non-standard results based on the template a 
+	* campaign is using. You only want to use this 
+	* if you want to allow editing template sections in your application.
 	*/
 	public function campaignsTemplateContent($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/template-content', $params);
 	}
 
-	/*
-	Unschedule a campaign that is scheduled to be sent in the future
+	/**
+	* Unschedule a campaign that is scheduled to be sent in the future
 	*/
 	public function campaignsUnschedule($cid = null) {
 		$params = array('cid' => $cid);
 		return $this->sendRequest('campaigns/unschedule', $params);
 	}
 
-	/*
-	Update just about any setting besides type for a campaign that has not been sent
+	/**
+	* Update just about any setting besides type for a campaign that has not been sent
 	*/
 	public function campaignsUpdate($cid = null, $name = null, $value = array()) {
 		$params = array('cid' => $cid, 'name' => $name, 'value' => $value);
